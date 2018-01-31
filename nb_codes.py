@@ -5,6 +5,7 @@ from sklearn.metrics import accuracy_score
 from matplotlib import pyplot as plt
 from matplotlib import pyplot as plt
 from sklearn.ensemble import RandomForestClassifier
+plt.style.use('fivethirtyeight')
 
 genome = pd.read_csv("genome.csv")
 li = pd.read_csv("li.csv")
@@ -37,7 +38,7 @@ features = comp_df_na.iloc[:,8:49].columns
 importances = clf1.feature_importances_
 indices = np.argsort(importances)
 plt.title('Variable Importances')
-plt.barh(range(len(indices)), importances[indices], color='lightcoral', align='center')
+plt.barh(range(len(indices)), importances[indices], color='', align='center')
 plt.yticks(range(len(indices)), features[indices])
 plt.xlabel('Relative Importance')
 plt.tick_params(axis='both', which='major', labelsize=4)
@@ -124,6 +125,16 @@ plt.title('Cluster Median Comparisons')
 plt.xticks(ind, seg_comp_df.index, rotation=90)
 plt.yticks(np.arange(0, 76, 2))
 plt.legend(('Segment 2', 'Segment 4'))
+plt.tick_params(axis='both', which='major', labelsize=6)
+plt.tick_params(axis='both', which='minor', labelsize=1)
+plt.show()
+
+# compare target variable
+plt.bar([0,1], [y2.mean(), y4.mean()],color=['lightcoral','skyblue'])
+plt.title('Cluster Event Rate Comparisons', fontsize=12)
+plt.ylabel('Event Rate',fontsize=10)
+plt.xlabel('Segments',fontsize=10)
+plt.xticks([0,1], ['Segment 2', 'Segment 4'])
 plt.tick_params(axis='both', which='major', labelsize=6)
 plt.tick_params(axis='both', which='minor', labelsize=1)
 plt.show()
